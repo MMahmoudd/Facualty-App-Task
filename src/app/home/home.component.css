@@ -1,0 +1,40 @@
+.image{
+  background-image: url('../../assets/custom.jpg');
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.card {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  transition: 0.3s;
+  height: 500px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #b1b1b166
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  margin-top: 20px;
+  border-radius: 50%;
+  max-width: 120px;
+  max-height: 120px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.container{
+  padding: 2px 16px;
+}

@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row" *ngFor="let student of itemArray">
+
+    <div class="col-md-4 text-center">
+      <img  src="../../../assets/images.jpeg">
+      <h3>{{student.name}}</h3>
+    </div>
+
+    <div class="col-md-8">
+      <form>
+
+        <fieldset disabled>
+          <div class="form-group">
+            <label for="disabledTextInput">Faculty Name</label>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="{{student.faculty}}">
+
+            <label for="disabledTextInput1">Phone</label>
+            <input type="text" id="disabledTextInput1" class="form-control" placeholder="{{student.phone}}">
+
+            <label for="disabledTextInput2">Date Of birth</label>
+            <input type="text" id="disabledTextInput2" class="form-control" placeholder="{{student.date}}">
+
+            <label for="disabledTextInput3">Address</label>
+            <input type="text" id="disabledTextInput3" class="form-control" placeholder="{{student.address}}">
+          </div>
+        </fieldset>
+        <button class="btn btn-success" >Edit</button>
+
+        <button type="button" class="btn btn-danger" (click)="openModal(template)">Delete</button>
+        <br>
+        <br>
+        <pre class="card card-block card-header">{{message}}</pre>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Do you want to confirm?</p>
+            <button type="button" class="btn btn-default" (click)="confirm(student.$key)" >Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+          </div>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
