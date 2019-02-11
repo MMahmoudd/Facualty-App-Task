@@ -2,10 +2,10 @@
 <carousel>
   <div class="image">
     <slide *ngFor="let item of itemArray">
-      <div class="card" (click)="toggleCollapse()">
-        <img class="center" src="../../assets/shutterstock_139468967.jpg" alt="Avatar">
+      <div class="card" (click)="toggleCollapse(item)">
+        <img class="center" src="{{item.url}}" alt="Avatar">
         <div class="container">
-          <h4><b>{{item.name}}</b></h4>
+          <h4><b>{{item.studentName}}</b></h4>
           <p>{{item.address}}</p>
         </div>
       </div>
@@ -15,9 +15,4 @@
 </carousel>
 
 <app-info *ngIf="!isCollapsed"></app-info>
-<!--$key: "-LY4wIALc9c3EZUH0DFE"-->
-<!--address: "xxxxxxxxxxxx"-->
-<!--date: "2019-02-22"-->
-<!--faculty: "4"-->
-<!--name: "xxxxxxxxxx"-->
-<!--phone: "xxxxxxxxxxxx"-->
+

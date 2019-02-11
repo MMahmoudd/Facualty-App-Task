@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { HomeComponent } from '../home.component';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,15 +11,20 @@ import { HomeComponent } from '../home.component';
 })
 export class InfoComponent implements OnInit {
 
+  data: any;
+  faculty: any[] = [];
+  facultySelected: number;
+  modifedText: string;
   modalRef: BsModalRef;
   message: string;
 
 
   itemArray = [];
-  itemList: AngularFireList <any>;
+  itemList: AngularFireList<any>;
 
   constructor(private modalService: BsModalService,
-              public db: AngularFireDatabase) {
+              public db: AngularFireDatabase,
+              public router: Router) {
     this.itemList = db.list('student');
 
     this.itemList.snapshotChanges().subscribe(actions => {
@@ -45,11 +50,45 @@ export class InfoComponent implements OnInit {
     this.modalRef.hide();
   }
 
-
-  ngOnInit() {
+  onEdit(studentName, faculty, phone, date, address, url) {
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
   }
 
+  cancel() {
+    this.message = 'cancelld';
+    this.modalRef.hide()
+  }
+
+  ngOnInit() {
+
+    this.data = {
+      studentName: '',
+      phone: '',
+      date: '',
+      address: ''
+    };
+
+    this.faculty = [
+      {Id: 1, name: 'Cairo'},
+      {Id: 2, name: 'Alex'},
+      {Id: 3, name: 'Helwan'},
+      {Id: 4, name: 'AUC'},
+      {Id: 5, name: 'ain shams'}
+    ];
+    this.facultySelected = 2;
+  }
+
+  onFaculatySelected(val: any) {
+    this.customFunction(val);
+  }
+
+  customFunction(val: any) {
+    this.modifedText = 'the value ' + val + ' was selected from dropdown';
+  }
 }
+
+
 export class StudentClass {
   $key: string;
   name: string;

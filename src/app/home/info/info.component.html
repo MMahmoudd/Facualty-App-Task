@@ -2,8 +2,8 @@
   <div class="row" *ngFor="let student of itemArray">
 
     <div class="col-md-4 text-center">
-      <img  src="../../../assets/images.jpeg">
-      <h3>{{student.name}}</h3>
+      <img  src="{{student.url}}">
+      <h3>{{student.studentName}}</h3>
     </div>
 
     <div class="col-md-8">
@@ -24,7 +24,7 @@
             <input type="text" id="disabledTextInput3" class="form-control" placeholder="{{student.address}}">
           </div>
         </fieldset>
-        <button class="btn btn-success" >Edit</button>
+        <button class="btn btn-success" (click)="openModal(edit)">Edit</button>
 
         <button type="button" class="btn btn-danger" (click)="openModal(template)">Delete</button>
         <br>
@@ -39,5 +39,85 @@
         </ng-template>
       </form>
     </div>
+
+    <pre class="card card-block card-header">{{message}}</pre>
+    <ng-template #edit>
+      <div class="modal-body text-center">
+
+
+
+        <form #f="ngForm" novalidate>
+          <div class="form-group row">
+            <label for="Name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="Name" maxlength="50" placeholder="Name" name="name" value={{student.studentName}} required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" value={{student.phone}} required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Faculty</label>
+            <div class="col-sm-10">
+              <select name="collage" class="custom-select form-control"  value={{student.faculty}} (ngModelChange)="onFaculatySelected($event)">
+                <option id="collage" *ngFor="let collage of faculty" [value]="collage.Id">
+                  {{collage.name}}
+                </option>
+              </select>
+              {{modifedText}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="Date" class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-10">
+
+              <input
+                id="Date"
+                placeholder="Datepicker"
+                class="form-control"
+                type="date"
+                (change)="foo($event.target.value)"
+                name="date" value={{student.date}} required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="address" class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="address" placeholder="Address" name="address" value={{student.address}}>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Image</label>
+            <div class="col-sm-10">
+
+              <div class="custom-file mb-3">
+                <input type="file"  class="custom-file-input" id="customFile" (change)="selectFile($event)" value={{student.name}}>
+                <label class="custom-file-label" for="customFile">Choose Image</label>
+              </div>
+
+            </div>
+          </div>
+
+
+        </form>
+
+
+
+
+        <button type="button" class="btn btn-default"
+                (click)="onEdit(student.studentName, student.faculty, student.phone, student.date, student.address, student.url)">
+          Save
+        </button>
+        <button type="button" class="btn btn-primary" (click)="cancel()" >Cancle</button>
+      </div>
+    </ng-template>
+
   </div>
 </div>
